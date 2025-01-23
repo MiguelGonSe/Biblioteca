@@ -1,14 +1,14 @@
-public class Usuario {
+public class Usuarios {
     private String id; // Identificador único del usuario
     private String nombre; // Nombre del usuario
-    private String correo; // Correo electrónico
+     // Correo electrónico
     private boolean esAdmin; // Indica si es administrador
 
     // Constructor
-    public Usuario(String id, String nombre, String correo, boolean esAdmin) {
+    public Usuarios(String id, String nombre, boolean esAdmin) {
         this.id = id;
         this.nombre = nombre;
-        this.correo = correo;
+        
         this.esAdmin = esAdmin;
     }
 
@@ -17,15 +17,21 @@ public class Usuario {
         return id;
     }
 
+    public void setid(String id){
+        this.id = id;
+    }
+
     public String getNombre() {
         return nombre;
     }
 
-    public String getCorreo() {
-        return correo;
+    public void setNombre(String nombre){
+        this.nombre = nombre;
     }
 
-    public boolean isAdmin() {
+
+
+    public boolean isAdmin() { // is es para los boolean no get
         return esAdmin;
     }
 
@@ -36,6 +42,31 @@ public class Usuario {
                 ", Nombre='" + nombre + '\'' +
                 ", Correo='" + correo + '\'' +
                 ", Rol=" + (esAdmin ? "Administrador" : "Usuario") +
+                '}';
+    }
+}
+public class Usuario {
+    private int id;
+    private String nombre;
+
+    public Usuario(int id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
                 '}';
     }
 }
