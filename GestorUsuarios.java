@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.Scanner;
+
 /**
  * Clase que gestiona usuarios.
  *
@@ -7,7 +8,9 @@ import java.util.Scanner;
  */
 public class GestorUsuarios {
     private Usuarios[] usuarios;
+    private Libro[] libros;
     private int totalUsuarios;
+    private int totalLibros;
     private static final int TAM = 50;
 
     /**
@@ -15,7 +18,9 @@ public class GestorUsuarios {
      */
     public GestorUsuarios() {
         usuarios = new Usuarios[TAM];
+        libros = new Libro[TAM];
         totalUsuarios = 0;
+        totalLibros = 0;
     }
 
     /**
@@ -33,6 +38,20 @@ public class GestorUsuarios {
             }
         } else {
             System.out.println("No se pueden agregar más usuarios. Capacidad máxima alcanzada.");
+        }
+    }
+
+    /**
+     * Añade un nuevo libro al sistema.
+     *
+     * @param nuevoLibro el libro a añadir.
+     */
+    public void añadirLibro(Libro nuevoLibro) {
+        if (totalLibros < TAM) {
+            libros[totalLibros] = nuevoLibro;
+            totalLibros++;
+        } else {
+            System.out.println("No se pueden agregar más libros. Capacidad máxima alcanzada.");
         }
     }
 
@@ -90,6 +109,7 @@ public class GestorUsuarios {
             }
         }
     }
+
     public void iniciarSesion(int idUsuario) {
         Usuarios usuario = buscarUsuarioPorId(idUsuario);
         if (usuario != null) {
@@ -104,6 +124,7 @@ public class GestorUsuarios {
             System.out.println("Usuario con ID " + idUsuario + " no encontrado.");
         }
     }
+
     private void mostrarMenuAdministrador(Usuarios admin) {
         System.out.println("\nBienvenido, Administrador " + admin.getNombre());
         boolean continuar = true;
@@ -174,7 +195,9 @@ public class GestorUsuarios {
                     System.out.println("Opción no válida. Intente nuevamente.");
             }
         }
-    }private void mostrarMenuUsuario(Usuarios usuario) {
+    }
+
+    private void mostrarMenuUsuario(Usuarios usuario) {
         System.out.println("\nBienvenido, Usuario " + usuario.getNombre());
         boolean continuar = true;
         Scanner sc = new Scanner(System.in);

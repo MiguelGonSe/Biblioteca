@@ -1,6 +1,8 @@
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class App {
+    
     public static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -24,7 +26,7 @@ public class App {
     public static void entrar() {
 
         System.out.println("Bienvenido a Almendralejo Libreria Online, que deseas hacer ");
-        System.out.println("Pulsa 1 para introducir usuario y contraseña. ");
+        System.out.println("Pulsa 1 para introducir ID del Usuario. ");
         System.out.println("Pulsa 2 para volver al menu. ");
         boolean seguir = true;
         while (seguir) {
@@ -38,11 +40,53 @@ public class App {
     }
 
     public static void entrar2() {
-
-        System.out.println("Bienvenido a Almendralejo Libreria Online ");
-        System.out.println("Introduce tu usuario y contraseña ");
-
-    }
+        Scanner sc = new Scanner(System.in);
+        
+         // Crear usuarios
+         Usuarios Miguel = new Usuarios(1, "Miguel", true);
+         Usuarios Juanfran = new Usuarios(2, "Juanfran", true);
+         Usuarios Angel = new Usuarios(3, "Angel", false);
+         Usuarios Alverto = new Usuarios(4, "Alverto", false);
+         Usuarios Nicolas = new Usuarios(5, "Nicolas", false);
+         Usuarios Ale = new Usuarios(6, "Ale", false);
+         Usuarios Lucia = new Usuarios(7, "Lucia", false);
+         Usuarios Rebeca = new Usuarios(8, "Rebeca", false);
+         Usuarios Teresa = new Usuarios(9, "Teresa", false);
+         Usuarios Gabino = new Usuarios(10, "Gabino", false);
+ 
+         // Crear instancia del gestor de usuarios
+         GestorUsuarios gestor = new GestorUsuarios();
+ 
+         // Añadir usuarios al gestor
+         gestor.nuevoUsuario(Miguel);
+         gestor.nuevoUsuario(Juanfran);
+         gestor.nuevoUsuario(Angel);
+         gestor.nuevoUsuario(Alverto);
+         gestor.nuevoUsuario(Nicolas);
+         gestor.nuevoUsuario(Ale);
+         gestor.nuevoUsuario(Lucia);
+         gestor.nuevoUsuario(Rebeca);
+         gestor.nuevoUsuario(Teresa);
+         gestor.nuevoUsuario(Gabino);
+ 
+         // Menú principal
+         boolean continuar = true;
+ 
+         while (continuar) {
+             System.out.println("\n--- Biblioteca Digital ---");
+             System.out.print("Ingrese su ID de usuario para iniciar sesión: ");
+             int idSesion = sc.nextInt();
+             sc.nextLine();
+ 
+             gestor.iniciarSesion(idSesion);
+ 
+             System.out.print("\n¿Desea continuar? (true/false): ");
+             continuar = sc.nextBoolean();
+         }
+ 
+         sc.close();
+         System.out.println("Gracias por usar la Biblioteca Digital. ¡Hasta pronto!");
+     }
 
     public static void salir() {
         System.out.println("Has salido del programa. Esperamos verle pronto. ");
