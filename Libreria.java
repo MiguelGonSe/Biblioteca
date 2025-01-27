@@ -4,7 +4,7 @@ public class Libreria{
     private int capacidad;
     private static final int tamaño = 50;
 
-    public void gestionLibros() {
+    public Libreria() {
 
         libros = new Libro[tamaño];
         capacidad = 0;
@@ -19,14 +19,14 @@ public class Libreria{
     }
 
     private int buscarLibroTitulo(String titulo) {
-        int busqueda = -1; //Se inicializa con -1, que indica que la canción no se ha encontrado. 
+        int busqueda = -1; //Se inicializa con -1, que indica que el libro no se ha encontrado. 
 
-        for (int i = 0; i < capacidad && busqueda == -1; i++) { //Buscar -1 para parar cuando encuentre la cancion deseada.
+        for (int i = 0; i < capacidad && busqueda == -1; i++) { //Buscar -1 para parar cuando encuentre la cancion deseada y sales del for.
             if (libros[i].getTitulo().equals(titulo)) {
                 busqueda = i;
             }
         }
-        return busqueda;
+        return busqueda; // Si es -1 no has encontrado.
     }
 
     private int buscarLibroAutor(String autor) {
