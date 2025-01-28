@@ -4,17 +4,13 @@ import java.util.Scanner;
 
 public class GestorUsuarios {
     private Usuarios[] usuarios;
-    private Libro[] libros;
     private int totalUsuarios;
-    private int totalLibros;
     private static final int TAM = 50;
 
   
     public GestorUsuarios() {
         usuarios = new Usuarios[TAM];
-        libros = new Libro[TAM];
         totalUsuarios = 0;
-        totalLibros = 0;
     }
 
    
@@ -31,15 +27,6 @@ public class GestorUsuarios {
         }
     }
 
-
-    public void añadirLibro(Libro nuevoLibro) {
-        if (totalLibros < TAM) {
-            libros[totalLibros] = nuevoLibro;
-            totalLibros++;
-        } else {
-            System.out.println("No se pueden agregar más libros. Capacidad máxima alcanzada.");
-        }
-    }
 
     private int buscarIndiceUsuario(int idUsuario) {
         for (int i = 0; i < totalUsuarios; i++) {
