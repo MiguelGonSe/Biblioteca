@@ -1,24 +1,24 @@
 import java.util.Scanner;
 
 public class Usuarios {
-    private int idUsuario; // Identificador único del usuario
+    private int comtraseña; // Identificador único del usuario
     private String nombre; // Nombre del usuario
     private boolean esAdmin; // Indica si es administrador
 
     // Constructor
-    public Usuarios(int idUsuario, String nombre, boolean esAdmin) {
-        this.idUsuario = idUsuario;
+    public Usuarios(int contraseña, String nombre, boolean esAdmin) {
+        this.comtraseña = contraseña;
         this.nombre = nombre;
         this.esAdmin = esAdmin;
     }
 
     // Getters y Setters
-    public int getIdUsuario() {
-        return idUsuario;
+    public int getComtraseña() {
+        return comtraseña;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setComtraseña(int contraseña) {
+        this.comtraseña = contraseña;
     }
 
     public String getNombre() {
@@ -36,7 +36,7 @@ public class Usuarios {
     @Override
     public String toString() {
         return "Usuario{" +
-                "ID=" + idUsuario +
+                "ID=" + comtraseña +
                 ", Nombre='" + nombre + '\'' +
                 ", Rol=" + (esAdmin ? "Administrador" : "Usuario") +
                 '}';

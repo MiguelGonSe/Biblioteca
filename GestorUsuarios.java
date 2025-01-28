@@ -16,11 +16,11 @@ public class GestorUsuarios {
    
     public void nuevoUsuario(Usuarios nuevoUsuario) {
         if (totalUsuarios < TAM) {
-            if (buscarUsuarioPorId(nuevoUsuario.getIdUsuario()) == null) {
+            if (buscarUsuarioPorContraseña(nuevoUsuario.getComtraseña()) == null) {
                 usuarios[totalUsuarios] = nuevoUsuario;
                 totalUsuarios++;
             } else {
-                System.out.println("El usuario con ID " + nuevoUsuario.getIdUsuario() + " ya existe.");
+                System.out.println("El usuario con contraseña " + nuevoUsuario.getComtraseña() + " ya existe.");
             }
         } else {
             System.out.println("No se pueden agregar más usuarios. Capacidad máxima alcanzada.");
@@ -28,9 +28,9 @@ public class GestorUsuarios {
     }
 
 
-    private int buscarIndiceUsuario(int idUsuario) {
+    private int buscarContraseñaUsuario(int contraseña) {
         for (int i = 0; i < totalUsuarios; i++) {
-            if (usuarios[i].getIdUsuario() == idUsuario) {
+            if (usuarios[i].getComtraseña() == contraseña) {
                 return i;
             }
         }
@@ -38,16 +38,16 @@ public class GestorUsuarios {
     }
 
 
-    public Usuarios buscarUsuarioPorId(int idUsuario) {
-        int indice = buscarIndiceUsuario(idUsuario);
-        return (indice != -1) ? usuarios[indice] : null;
+    public Usuarios buscarUsuarioPorContraseña(int contraseña) {
+        int Contraseña = buscarContraseñaUsuario(contraseña);
+        return (Contraseña != -1) ? usuarios[Contraseña] : null;
     }
 
 
-    public boolean eliminarUsuario(int idUsuario) {
-        int indice = buscarIndiceUsuario(idUsuario);
-        if (indice != -1) {
-            for (int i = indice; i < totalUsuarios - 1; i++) {
+    public boolean eliminarUsuario(int contraseña) {
+        int Contraseña = buscarContraseñaUsuario(contraseña);
+        if (Contraseña != -1) {
+            for (int i = Contraseña; i < totalUsuarios - 1; i++) {
                 usuarios[i] = usuarios[i + 1];
             }
             usuarios[--totalUsuarios] = null; // Reducimos el tamaño y eliminamos la referencia al último elemento
@@ -67,8 +67,8 @@ public class GestorUsuarios {
         }
     }
 
-    public void iniciarSesion(int idUsuario) {
-        Usuarios usuario = buscarUsuarioPorId(idUsuario);
+    public void iniciarSesion(int contraseña) {
+        Usuarios usuario = buscarUsuarioPorContraseña(contraseña);
         if (usuario != null) {
             if (usuario.isAdmin()) {
                 mostrarMenuAdministrador(usuario);
@@ -78,7 +78,7 @@ public class GestorUsuarios {
                 System.out.println("Bienvenido, Usuario " + usuario.getNombre());
             }
         } else {
-            System.out.println("Usuario con ID " + idUsuario + " no encontrado.");
+            System.out.println("Usuario con Contraseña " + contraseña + " no encontrado.");
         }
     }
 
@@ -100,8 +100,8 @@ public class GestorUsuarios {
 
             switch (opcion) {
                 case 1:
-                    System.out.print("Ingrese el ID del usuario: ");
-                    int idUsuario = sc.nextInt();
+                    System.out.print("Ingrese la contraseña del usuario: ");
+                    int contraseña = sc.nextInt();
                     sc.nextLine();
 
                     System.out.print("Ingrese el nombre del usuario: ");
@@ -110,7 +110,7 @@ public class GestorUsuarios {
                     System.out.print("¿Es administrador? (true/false): ");
                     boolean esAdmin = sc.nextBoolean();
 
-                    Usuarios nuevoUsuario = new Usuarios(idUsuario, nombre, esAdmin);
+                    Usuarios nuevoUsuario = new Usuarios(contraseña, nombre, esAdmin);
                     nuevoUsuario(nuevoUsuario);
                     System.out.println("Usuario agregado exitosamente.");
                     break;
@@ -120,26 +120,26 @@ public class GestorUsuarios {
                     break;
 
                 case 3:
-                    System.out.print("Ingrese el ID del usuario a buscar: ");
-                    int idBuscar = sc.nextInt();
-                    Usuarios usuarioEncontrado = buscarUsuarioPorId(idBuscar);
+                    System.out.print("Ingrese el contraseña del usuario a buscar: ");
+                    int buscarContraseña = sc.nextInt();
+                    Usuarios usuarioEncontrado = buscarUsuarioPorContraseña(buscarContraseña);
 
                     if (usuarioEncontrado != null) {
                         System.out.println("Usuario encontrado: " + usuarioEncontrado);
                     } else {
-                        System.out.println("Usuario con ID " + idBuscar + " no encontrado.");
+                        System.out.println("Usuario con contraseña " + buscarContraseña + " no encontrado.");
                     }
                     break;
 
                 case 4:
-                    System.out.print("Ingrese el ID del usuario a eliminar: ");
-                    int idEliminar = sc.nextInt();
-                    boolean eliminado = eliminarUsuario(idEliminar);
+                    System.out.print("Ingrese la contraseña del usuario a eliminar: ");
+                    int eliminarContaseña = sc.nextInt();
+                    boolean eliminado = eliminarUsuario(eliminarContaseña);
 
                     if (eliminado) {
                         System.out.println("Usuario eliminado exitosamente.");
                     } else {
-                        System.out.println("Usuario con ID " + idEliminar + " no encontrado.");
+                        System.out.println("Usuario con contraseña " + eliminarContaseña + " no encontrado.");
                     }
                     break;
 
