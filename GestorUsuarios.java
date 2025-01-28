@@ -1,11 +1,7 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-/**
- * Clase que gestiona usuarios.
- *
- * @author M.J.
- */
+
 public class GestorUsuarios {
     private Usuarios[] usuarios;
     private Libro[] libros;
@@ -13,9 +9,7 @@ public class GestorUsuarios {
     private int totalLibros;
     private static final int TAM = 50;
 
-    /**
-     * Constructor que inicializa el gestor con un tamaño máximo predeterminado.
-     */
+  
     public GestorUsuarios() {
         usuarios = new Usuarios[TAM];
         libros = new Libro[TAM];
@@ -23,11 +17,7 @@ public class GestorUsuarios {
         totalLibros = 0;
     }
 
-    /**
-     * Añade un nuevo usuario al gestor.
-     *
-     * @param nuevoUsuario el usuario a añadir.
-     */
+   
     public void nuevoUsuario(Usuarios nuevoUsuario) {
         if (totalUsuarios < TAM) {
             if (buscarUsuarioPorId(nuevoUsuario.getIdUsuario()) == null) {
@@ -41,11 +31,7 @@ public class GestorUsuarios {
         }
     }
 
-    /**
-     * Añade un nuevo libro al sistema.
-     *
-     * @param nuevoLibro el libro a añadir.
-     */
+
     public void añadirLibro(Libro nuevoLibro) {
         if (totalLibros < TAM) {
             libros[totalLibros] = nuevoLibro;
@@ -55,12 +41,6 @@ public class GestorUsuarios {
         }
     }
 
-    /**
-     * Busca el índice de un usuario por su ID.
-     *
-     * @param idUsuario el ID del usuario a buscar.
-     * @return el índice del usuario, o -1 si no se encuentra.
-     */
     private int buscarIndiceUsuario(int idUsuario) {
         for (int i = 0; i < totalUsuarios; i++) {
             if (usuarios[i].getIdUsuario() == idUsuario) {
@@ -70,23 +50,13 @@ public class GestorUsuarios {
         return -1;
     }
 
-    /**
-     * Busca un usuario por su ID.
-     *
-     * @param idUsuario el ID del usuario a buscar.
-     * @return el usuario encontrado, o null si no se encuentra.
-     */
+
     public Usuarios buscarUsuarioPorId(int idUsuario) {
         int indice = buscarIndiceUsuario(idUsuario);
         return (indice != -1) ? usuarios[indice] : null;
     }
 
-    /**
-     * Elimina un usuario por su ID.
-     *
-     * @param idUsuario el ID del usuario a eliminar.
-     * @return true si el usuario se eliminó correctamente, false en caso contrario.
-     */
+
     public boolean eliminarUsuario(int idUsuario) {
         int indice = buscarIndiceUsuario(idUsuario);
         if (indice != -1) {
@@ -226,11 +196,7 @@ public class GestorUsuarios {
         }
     }
 
-    /**
-     * Devuelve una representación en cadena de todos los usuarios.
-     *
-     * @return una cadena con los usuarios.
-     */
+   
     @Override
     public String toString() {
         String resultado = "";

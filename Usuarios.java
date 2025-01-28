@@ -41,15 +41,4 @@ public class Usuarios {
                 ", Rol=" + (esAdmin ? "Administrador" : "Usuario") +
                 '}';
     }
-
-    public void prestarLibro(Libro libro) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'prestarLibro'");
-    }
-
-    public String getLibrosPrestados() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getLibrosPrestados'");
-    }
-
 }
