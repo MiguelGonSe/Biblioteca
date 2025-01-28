@@ -96,11 +96,6 @@ public class App {
 
     // Submenú para Gestión de Usuarios
     private static void menuUsuarios(Scanner sc) {
-        System.out.print("Ingrese su ID de usuario para iniciar sesión: ");
-        int idSesion = sc.nextInt();
-        sc.nextLine();
-
-        gestor.iniciarSesion(idSesion);
         System.out.println("\n--- Gestión de Usuarios ---");
         System.out.println("1. Registrar nuevo usuario (admin)");
         System.out.println("2. Consultar usuarios registrados (admin)");
