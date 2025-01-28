@@ -6,20 +6,20 @@ public class Libreria{
     public Libreria() {
 
         libros = new Libro[] {
-            new Libro(1, "El señor de los anillos", "Aventuras", "Tolkien", false),
+            new Libro(1, "El senior de los anillos", "Aventuras", "Tolkien", false),
             new Libro(2, "1984", "Historia", "George Orwell", false),
-            new Libro(3, "Cien años de soledad", "Drama", "Gabriel García Márquez", false),
+            new Libro(3, "Cien anios de soledad", "Drama", "Gabriel García Márquez", false),
             new Libro(4, "Don Quijote de la Mancha", "Historia", "Miguel de Cervantes", false),
             new Libro(5, "Harry Potter y la piedra filosofal", "Fantasía", "J.K. Rowling", false),
             new Libro(6, "El principito", "Fantasía", "Antoine de Saint-Exupéry", false),
-            new Libro(7, "Crónica de una muerte anunciada", "Misterio", "Gabriel García Márquez", false),
+            new Libro(7, "Cronica de una muerte anunciada", "Misterio", "Gabriel García Márquez", false),
             new Libro(8, "Orgullo y prejuicio", "Romance", "Jane Austen", false),
             new Libro(9, "Fahrenheit 451", "Ciencia ficción", "Ray Bradbury", false),
             new Libro(10, "Los juegos del hambre", "Aventuras", "Suzanne Collins", false),
-            new Libro(11, "Matar a un ruiseñor", "Drama", "Harper Lee", false),
+            new Libro(11, "Matar a un ruisenior", "Drama", "Harper Lee", false),
             new Libro(12, "La sombra del viento", "Misterio", "Carlos Ruiz Zafón", false),
             new Libro(13, "El hobbit", "Aventuras", "Tolkien", false),
-            new Libro(14, "Drácula", "Terror", "Bram Stoker", false),
+            new Libro(14, "Dracula", "Terror", "Bram Stoker", false),
             new Libro(15, "La divina comedia", "Historia", "Dante Alighieri", false)
         };
     }
