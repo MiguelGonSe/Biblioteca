@@ -1,33 +1,35 @@
 public class Libro {
 
-    private String ISBN;
+    private int ISBN;
     private String titulo;
     private String categoria;
     private String autor;
     private Boolean prestado;
-    private int prestamosTotales = 0;
+    private int prestamosTotales;
 
     public Libro() {
-        this.ISBN = "";
+        this.ISBN = 0;
         this.titulo = "";
         this.categoria = "";
         this.autor = "";
         this.prestado = false;
+        this.prestamosTotales = 0;
     }
 
-    public Libro(String ISBN, String titulo, String categoria, String autor, Boolean pestado) {
+    public Libro(int ISBN, String titulo, String categoria, String autor, Boolean pestado) {
         this.ISBN = ISBN;
         this.titulo = titulo;
         this.categoria = categoria;
         this.autor = autor;
         this.prestado = false;
+        this.prestamosTotales= 0;
     }
 
-    public String getISBN() {
+    public int getISBN() {
         return this.ISBN;
     }
 
-    public void setISBN(String ISBN) {
+    public void setISBN(int ISBN) {
         this.ISBN = ISBN;
     }
 
@@ -65,6 +67,10 @@ public class Libro {
 
     public void setPrestado(Boolean prestado) {
         this.prestado = prestado;
+    }
+
+    public int getPrestamosTotales(){
+        return this.prestamosTotales;
     }
 
     public void prestar(){

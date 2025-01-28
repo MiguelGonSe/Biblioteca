@@ -1,19 +1,23 @@
-import java.util.Scanner;
-
 public class Usuarios {
-    private int idUsuario; // Identificador único del usuario
-    private String nombre; // Nombre del usuario
-    private boolean esAdmin; // Indica si es administrador
 
-    // Constructor
+    private int idUsuario; 
+    private String nombre; 
+    private boolean esAdmin; 
+
+    public Usuarios(){
+        this.idUsuario = 0;
+        this.nombre = "";
+        this.esAdmin = false;
+    }
+
+
     public Usuarios(int idUsuario, String nombre, boolean esAdmin) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
-
         this.esAdmin = esAdmin;
     }
 
-    // Getters y Setters
+
     public int getIdUsuario() {
         return idUsuario;
     }
@@ -30,8 +34,12 @@ public class Usuarios {
         this.nombre = nombre;
     }
 
-    public boolean isAdmin() { // is es para los boolean no get
+    public boolean esAdmin() { // is es para los boolean no get
         return esAdmin;
+    }
+
+    public void setesAdmin(boolean esAdmin) {
+        this.esAdmin = esAdmin;
     }
     
     @Override
