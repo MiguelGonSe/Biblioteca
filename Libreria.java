@@ -1,7 +1,7 @@
 public class Libreria{
 
     private Libro[] libros;
-    private int cantidadLibros = 15;
+    private int cantidadLibros = 50;
 
     public Libreria() {
 
@@ -71,14 +71,10 @@ public class Libreria{
         return busqueda;
     }
 
-    public int mostrarLibro(String titulo){
-        int busqueda = -1;
-        for (int i = 0; i < libros.length && busqueda == -1; i++) { 
-            if (libros[i].getTitulo().equals(titulo)) {
-                System.out.println(libros[i]);
-            } 
-        }
-        return busqueda;
+    public void mostrarLibros() {
+        for (int i = 0; i < libros.length; i++) { 
+            System.out.println(libros[i]);
+        } 
     }
 
     public boolean eliminarLibro(String titulo) {

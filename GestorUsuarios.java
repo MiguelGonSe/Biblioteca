@@ -1,7 +1,7 @@
 public class GestorUsuarios {
 
     private Usuarios[] usuarios;
-    int capacidad = 10;
+    int cantidadUsuarios = 50;
 
     public GestorUsuarios() {
         usuarios = new Usuarios[]{
@@ -18,11 +18,16 @@ public class GestorUsuarios {
         };
     }
 
-    public void añadirUsuario(Usuarios a) {
-        if (capacidad < usuarios.length) {
-            usuarios[capacidad] = a;
-            capacidad++;
-        } 
+    public void añadirUsuario(Usuarios nuevoUsuario){
+        if(cantidadUsuarios == usuarios.length){
+            Usuarios[] nuevoArray = new Usuarios[usuarios.length + 1];
+            for(int i = 0; i < usuarios.length; i++){
+                nuevoArray[i] = usuarios[i];
+            }
+            usuarios = nuevoArray;
+        }
+        usuarios[cantidadUsuarios] = nuevoUsuario;
+        cantidadUsuarios++;
     }
 
     public Usuarios buscarUsuarioPorId(int idUsuario) {
@@ -38,15 +43,35 @@ public class GestorUsuarios {
 
     
     public boolean eliminarUsuario(int idUsuario) {
-        Usuarios usuarioEncontrado = buscarUsuarioPorId(idUsuario);
-        if (usuarioEncontrado != null) {
-            for (int i = 0; i < usuarios.length - 1; i++) {
-                usuarios[i] = usuarios[i + 1];
+        for(int i = 0; i < usuarios.length; i++){
+            if(usuarios[i].getIdUsuario() == idUsuario){
+                for(int j = 0; j < usuarios.length -1; j++){
+                    usuarios[j] = usuarios [j + 1];
+                }
+                usuarios[cantidadUsuarios - 1] = null;
+                cantidadUsuarios--;
+                return true;
             }
-            usuarios[--capacidad] = null; // Reducimos el tamaño y eliminamos la referencia al último elemento
-            return true;
         }
         return false;
+    }
+
+    public void mostrarUsuarios() {
+        for (int i = 0; i < usuarios.length; i++) { 
+            System.out.println(usuarios[i]);
+        } 
+    }
+
+    public void mostrarUsuarioMasPrestamos() {
+        int librosPrestados = 0;
+        Usuarios usuarioMaximo = null;
+        for (int i = 0; i < usuarios.length; i++) { 
+            if(usuarios[i].getCantidadLibrosPrestados() > librosPrestados){
+                librosPrestados = usuarios[i].getCantidadLibrosPrestados();
+                usuarioMaximo = usuarios[i];
+            }
+        }
+        System.out.println("El usuario con más libros prestados es: " + usuarioMaximo.getNombre());
     }
 
     @Override

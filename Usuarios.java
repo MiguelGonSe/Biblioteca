@@ -2,12 +2,14 @@ public class Usuarios {
 
     private int idUsuario; 
     private String nombre; 
-    private boolean esAdmin; 
+    private boolean esAdmin;
+    private int cantidadLibrosPrestados; 
 
     public Usuarios(){
         this.idUsuario = 0;
         this.nombre = "";
         this.esAdmin = false;
+        this.cantidadLibrosPrestados = 0;
     }
 
 
@@ -40,6 +42,14 @@ public class Usuarios {
 
     public void setesAdmin(boolean esAdmin) {
         this.esAdmin = esAdmin;
+    }
+
+    public void setCantidadLibrosPrestados(int cantidadLibrosPrestados){
+        this.cantidadLibrosPrestados = cantidadLibrosPrestados;
+    }
+
+    public int getCantidadLibrosPrestados(){
+        return this.cantidadLibrosPrestados;
     }
     
     @Override

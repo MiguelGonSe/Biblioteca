@@ -53,7 +53,7 @@ public class App {
             }
 
         } else {
-            System.out.println("El usuario no existe.");
+            System.out.println("El Id de usuario no existe.");
         }
         sc.close();
     }
@@ -69,7 +69,9 @@ public class App {
         System.out.println("Pulsa 7 para realizar un prestamo de libro. ");
         System.out.println("Pulsa 8 para devolver un libro. ");
         System.out.println("Pulsa 9 para mostrar los libros prestados. ");
-        System.out.println("Pulsa 10 para salir de la aplicación. ");
+        System.out.println("Pulsa 10 para mostrar todos los usuarios registrados. ");
+        System.out.println("Pulsa 11 para mostrar el usuario con más préstamos activos. ");
+        System.out.println("Pulsa 12 para salir de la aplicación. ");
         boolean seguir = true;
         while (seguir) {
             switch (Integer.parseInt(sc.nextLine())) {
@@ -82,7 +84,9 @@ public class App {
                 case 7 -> prestarLibro();
                 case 8 -> devolverLibro();
                 case 9 -> mostrarLibrosPrestados();
-                case 10 -> salir();
+                case 10 -> mostrarUsuarios();
+                case 11 -> mostrarUsuarioConMasPrestamosActivos();
+                case 12 -> salir();
                 default -> seguir = false;
             }
         }
@@ -160,6 +164,7 @@ public class App {
         libreria.buscarLibroTitulo(tituloLibro);
         System.out.println(tituloLibro);
     }
+
     public static void buscarAutor() {
 
         System.out.println("Dame el autor del libro que deseas buscar ");
@@ -167,6 +172,7 @@ public class App {
         libreria.buscarLibroTitulo(autorLibro);
         System.out.println(autorLibro);
     }
+
     public static void buscarCategoria() {
 
         System.out.println("Dame la categoria del libro que deseas buscar ");
@@ -175,13 +181,16 @@ public class App {
         System.out.println(categoriaLibro);
     }
 
-
     public static void mostrarLibros() {
 
-        System.out.println("Has elegido mostrar libro. Dime el titulo del libro que deseas mostrar. ");
-        String tituloLibro = sc.nextLine();
-        libreria.mostrarLibro(tituloLibro);
-        System.out.println(tituloLibro);
+        System.out.println("Has elegido mostrar todos los libros registrados. ");
+        libreria.mostrarLibros();
+    }
+
+    public static void mostrarUsuarios() {
+
+        System.out.println("Has elegido mostrar todos los usuarios registrados. ");
+        gestorUsuarios.mostrarUsuarios();
     }
 
     public static void registrarUsuario() {
@@ -218,8 +227,7 @@ public class App {
         int idUsuario = Integer.parseInt(sc.nextLine());
         Usuarios usuarioEncontrado = gestorUsuarios.buscarUsuarioPorId(idUsuario);
         System.out.println(usuarioEncontrado.getNombre());
-        }
-
+    }
 
     public static void verTodosLosUsuarios() {
 
@@ -234,31 +242,66 @@ public class App {
         System.out.println("Por ejemplo, si quieres borrar el usuario con el ID1, pulsa 1 ");
         int idUsuario = Integer.parseInt(sc.nextLine());
         boolean eliminado = gestorUsuarios.eliminarUsuario(idUsuario);
-        if(eliminado){
+        if (eliminado) {
             System.err.println("Correcto, usuario eliminado");
-        } else{
-        System.out.println("Incorrecto, usuario no eliminado.");
+        } else {
+            System.out.println("Incorrecto, usuario no eliminado.");
         }
     }
 
     public static void prestarLibro() {
 
-        System.out.println("Has elegido coger prestado el libro. Dime el titulo del libro que quieras coger prestado: ");
+        System.out
+                .println("Has elegido coger prestado el libro. Dime el titulo del libro que quieras coger prestado: ");
         String tituloLibro = sc.nextLine();
         Libro libroPrestado = libreria.buscarLibroTitulo(tituloLibro);
-        libroPrestado.prestar();
+        if (libroPrestado != null) {
+            System.out.println("A que usuario le vamos a prestar el libro: ");
+            int idUsuario = Integer.parseInt(sc.nextLine());
+            Usuarios usuarioEncontrado = gestorUsuarios.buscarUsuarioPorId(idUsuario);
+            if (usuarioEncontrado != null) {
+                usuarioEncontrado.setCantidadLibrosPrestados(usuarioEncontrado.getCantidadLibrosPrestados() + 1);
+                libroPrestado.prestar();
+            } else {
+                System.out.println("El usuario no existe. ");
+            }
+        } else {
+            System.out.println("Libro no encontrado. ");
+        }
     }
 
     public static void devolverLibro() {
         System.out.println("Has elegido devolver el libro. Dime el titulo del libro que quieras devolver ");
         String tituloLibro = sc.nextLine();
         Libro libroDevuelto = libreria.buscarLibroTitulo(tituloLibro);
-        libroDevuelto.devolver();
+        if (libroDevuelto != null) {
+            System.out.println("A que usuario le vamos a prestar el libro: ");
+            int idUsuario = Integer.parseInt(sc.nextLine());
+            Usuarios usuarioEncontrado = gestorUsuarios.buscarUsuarioPorId(idUsuario);
+            if (usuarioEncontrado != null) {
+                if(usuarioEncontrado.getCantidadLibrosPrestados() > 0){
+                    usuarioEncontrado.setCantidadLibrosPrestados(usuarioEncontrado.getCantidadLibrosPrestados() - 1);
+                    libroDevuelto.devolver();
+                } else {
+                    System.out.println("Este usuario todavia no ha cogido prestado un libro. ");
+                }
+            } else {
+                System.out.println("El usuario no existe. ");
+            }
+        } else {
+            System.out.println("Libro no encontrado. ");
+        }
     }
 
     public static void mostrarLibrosPrestados() {
+        System.out.println("Estos son los libros prestados actualmente: ");
         libreria.mostrarLibrosPrestados();
+        System.out.println("Estos dos son los libros más prestados: ");
         libreria.mostrarLibrosmasPrestados();
+    }
+
+    public static void mostrarUsuarioConMasPrestamosActivos() {
+        gestorUsuarios.mostrarUsuarioMasPrestamos();
     }
 
     public static void salir() {
