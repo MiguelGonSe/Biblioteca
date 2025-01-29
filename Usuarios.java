@@ -1,24 +1,31 @@
-import java.util.Scanner;
-
 public class Usuarios {
-    private int comtraseña; // Identificador único del usuario
-    private String nombre; // Nombre del usuario
-    private boolean esAdmin; // Indica si es administrador
 
-    // Constructor
-    public Usuarios(int contraseña, String nombre, boolean esAdmin) {
-        this.comtraseña = contraseña;
+    private int idUsuario; 
+    private String nombre; 
+    private boolean esAdmin;
+    private int cantidadLibrosPrestados; 
+
+    public Usuarios(){
+        this.idUsuario = 0;
+        this.nombre = "";
+        this.esAdmin = false;
+        this.cantidadLibrosPrestados = 0;
+    }
+
+
+    public Usuarios(int idUsuario, String nombre, boolean esAdmin) {
+        this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.esAdmin = esAdmin;
     }
 
-    // Getters y Setters
-    public int getComtraseña() {
-        return comtraseña;
+
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setComtraseña(int contraseña) {
-        this.comtraseña = contraseña;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNombre() {
@@ -29,16 +36,29 @@ public class Usuarios {
         this.nombre = nombre;
     }
 
-    public boolean isAdmin() { // is es para los boolean no get
+    public boolean esAdmin() { // is es para los boolean no get
         return esAdmin;
+    }
+
+    public void setesAdmin(boolean esAdmin) {
+        this.esAdmin = esAdmin;
+    }
+
+    public void setCantidadLibrosPrestados(int cantidadLibrosPrestados){
+        this.cantidadLibrosPrestados = cantidadLibrosPrestados;
+    }
+
+    public int getCantidadLibrosPrestados(){
+        return this.cantidadLibrosPrestados;
     }
     
     @Override
     public String toString() {
         return "Usuario{" +
-                "ID=" + comtraseña +
+                "ID=" + idUsuario +
                 ", Nombre='" + nombre + '\'' +
                 ", Rol=" + (esAdmin ? "Administrador" : "Usuario") +
                 '}';
     }
+
 }

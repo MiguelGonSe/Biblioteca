@@ -1,186 +1,311 @@
 import java.util.Scanner;
 
 public class App {
+    public static Scanner sc = new Scanner(System.in);
+    private static GestorUsuarios gestorUsuarios = new GestorUsuarios();
+    private static Libreria libreria = new Libreria();
+
     public static void main(String[] args) {
+        menu();
+    }
 
-        Scanner sc = new Scanner(System.in);
-        boolean salir = false;
-        int opcion;
-        GestorUsuarios gestor = new GestorUsuarios();
-        Usuarios Miguel = new Usuarios(1, "Miguel", true);
-        Usuarios Juanfran = new Usuarios(2, "Juanfran", true);
-        Usuarios Angel = new Usuarios(3, "Angel", false);
-        Usuarios Alverto = new Usuarios(4, "Alverto", false);
-        Usuarios Nicolas = new Usuarios(5, "Nicolas", false);
-        Usuarios Ale = new Usuarios(6, "Ale", false);
-        Usuarios Lucia = new Usuarios(7, "Lucia", false);
-        Usuarios Rebeca = new Usuarios(8, "Rebeca", false);
-        Usuarios Teresa = new Usuarios(9, "Teresa", false);
-        Usuarios Gabino = new Usuarios(10, "Gabino", false);
-
-        gestor.nuevoUsuario(Miguel);
-        gestor.nuevoUsuario(Juanfran);
-        gestor.nuevoUsuario(Angel);
-        gestor.nuevoUsuario(Alverto);
-        gestor.nuevoUsuario(Nicolas);
-        gestor.nuevoUsuario(Ale);
-        gestor.nuevoUsuario(Lucia);
-        gestor.nuevoUsuario(Rebeca);
-        gestor.nuevoUsuario(Teresa);
-        gestor.nuevoUsuario(Gabino);
-
-        Libreria libreria = new Libreria();
-    Libro libro1 = new Libro("1", "El señor de los anillos", "Aventuras", "Tolkien", false);
-    Libro libro2 = new Libro("2", "1984", "Historia", "George Orwell", false);
-    Libro libro3 = new Libro("3", "Cien años de soledad", "Drama", "Gabriel García Márquez", false);
-    Libro libro4 = new Libro("4", "Don Quijote de la Mancha", "Historia", "Miguel de Cervantes", false);
-    Libro libro5 = new Libro("5", "Harry Potter y la piedra filosofal", "Fantasía", "J.K. Rowling", false);
-    Libro libro6 = new Libro("6", "El principito", "Fantasía", "Antoine de Saint-Exupéry", false);
-    Libro libro7 = new Libro("7", "Crónica de una muerte anunciada", "Misterio", "Gabriel García Márquez", false);
-    Libro libro8 = new Libro("8", "Orgullo y prejuicio", "Romance", "Jane Austen", false);
-    Libro libro9 = new Libro("9", "Fahrenheit 451", "Ciencia ficción", "Ray Bradbury", false);
-    Libro libro10 = new Libro("10", "Los juegos del hambre", "Aventuras", "Suzanne Collins", false);
-    Libro libro11 = new Libro("11", "Matar a un ruiseñor", "Drama", "Harper Lee", false);
-    Libro libro12 = new Libro("12", "La sombra del viento", "Misterio", "Carlos Ruiz Zafón", false);
-    Libro libro13 = new Libro("13", "El hobbit", "Aventuras", "Tolkien", false);
-    Libro libro14 = new Libro("14", "Drácula", "Terror", "Bram Stoker", false);
-    Libro libro15 = new Libro("15", "La divina comedia", "Historia", "Dante Alighieri", false);
-
-
-        while (!salir) {
-            System.out.println("\n=== Sistema de Gestión de Biblioteca Digital ===");
-            System.out.println("1. Gestión de Libros");
-            System.out.println("2. Gestión de Usuarios");
-            System.out.println("3. Gestión de Préstamos");
-            System.out.println("4. Estadísticas y Reportes");
-            System.out.println("5. Salir");
-            System.out.print("Seleccione una opción: ");
-
-            opcion = sc.nextInt();
-            sc.nextLine(); // Limpiar el buffer
-
-            switch (opcion) {
-                case 1:
-                    menuLibros(sc);
-                    break;
-                case 2:
-                    menuUsuarios(sc);
-                    break;
-                case 3:
-                    menuPrestamos(sc);
-                    break;
-                case 4:
-                    menuEstadisticas(sc);
-                    break;
-                case 5:
-                    System.out.println("Saliendo del sistema...");
-                    salir = true;
-                    break;
-                default:
-                    System.out.println("Opción inválida. Intente de nuevo.");
+    public static void menu() {
+        System.out.println("Dime que opción quieres ");
+        System.out.println("Pulsa 1 para entrar en la aplicación. ");
+        System.out.println("Pulsa 2 para salir de la aplicación. ");
+        boolean seguir = true;
+        while (seguir) {
+            switch (Integer.parseInt(sc.nextLine())) {
+                case 1 -> entrar();
+                case 2 -> salir();
+                default -> seguir = false;
             }
         }
         sc.close();
     }
 
-    // Submenú para Gestión de Libros
-    private static void menuLibros(Scanner sc) {
-        System.out.println("\n--- Gestión de Libros ---");
-        System.out.println("1. Agregar libro (admin)");
-        System.out.println("2. Eliminar libro (admin)");
-        System.out.println("3. Buscar libro");
-        System.out.println("4. Mostrar todos los libros");
-        System.out.print("Seleccione una opción: ");
-        int opcion = sc.nextInt();
-        sc.nextLine(); // Limpiar el buffer
+    public static void entrar() {
 
-        switch (opcion) {
-            case 1:
-                System.out.println("Función para agregar libro.");
-                break;
-            case 2:
-                System.out.println("Función para eliminar libro.");
-                break;
-            case 3:
-                System.out.println("Función para buscar libro.");
-                break;
-            case 4:
-                System.out.println("Función para mostrar todos los libros.");
-                break;
-            default:
-                System.out.println("Opción inválida.");
+        System.out.println("Bienvenido a Almendralejo Libreria Online, que deseas hacer ");
+        System.out.println("Pulsa 1 para introducir el Id de usuario. ");
+        System.out.println("Pulsa 2 para salir. ");
+        boolean seguir = true;
+        while (seguir) {
+            switch (Integer.parseInt(sc.nextLine())) {
+                case 1 -> entrar2();
+                case 2 -> salir();
+                default -> seguir = false;
+            }
+        }
+        sc.close();
+    }
+
+    public static void entrar2() {
+        System.out.println("Bienvenido a Almendralejo Libreria Online ");
+        System.out.println("Introduce tu Id de usuario: ");
+        int ID = Integer.parseInt(sc.nextLine());
+        Usuarios encontrado = gestorUsuarios.buscarUsuarioPorId(ID);
+        if (encontrado != null) {
+            if (encontrado.esAdmin()) {
+                menuAdmin();
+            } else {
+                menuUsuario();
+            }
+
+        } else {
+            System.out.println("El Id de usuario no existe.");
+        }
+        sc.close();
+    }
+
+    public static void menuAdmin() {
+        System.out.println("Bienvenido Administrador. ¿Qué deseas hacer? ");
+        System.out.println("Pulsa 1 para agregar un libro nuevo. ");
+        System.out.println("Pulsa 2 para eliminar libros existentes. ");
+        System.out.println("Pulsa 3 para buscar libro por titulo, autor o categoria. ");
+        System.out.println("Pulsa 4 para mostrar todos los libros disponibles. ");
+        System.out.println("Pulsa 5 para registrar nuevos usuarios. ");
+        System.out.println("Pulsa 6 para consultar información de los nuevos usuarios. ");
+        System.out.println("Pulsa 7 para realizar un prestamo de libro. ");
+        System.out.println("Pulsa 8 para devolver un libro. ");
+        System.out.println("Pulsa 9 para mostrar los libros prestados. ");
+        System.out.println("Pulsa 10 para mostrar todos los usuarios registrados. ");
+        System.out.println("Pulsa 11 para mostrar el usuario con más préstamos activos. ");
+        System.out.println("Pulsa 12 para salir de la aplicación. ");
+        boolean seguir = true;
+        while (seguir) {
+            switch (Integer.parseInt(sc.nextLine())) {
+                case 1 -> agregarLibro();
+                case 2 -> eliminarLibro();
+                case 3 -> buscarLibro();
+                case 4 -> mostrarLibros();
+                case 5 -> registrarUsuario();
+                case 6 -> verUsuarios();
+                case 7 -> prestarLibro();
+                case 8 -> devolverLibro();
+                case 9 -> mostrarLibrosPrestados();
+                case 10 -> mostrarUsuarios();
+                case 11 -> mostrarUsuarioConMasPrestamosActivos();
+                case 12 -> salir();
+                default -> seguir = false;
+            }
+        }
+        sc.close();
+    }
+
+    public static void menuUsuario() {
+        System.out.println("Bienvenido Usuario. ¿Qué desea hacer? ");
+        System.out.println("Pulsa 1 para buscar libro por titulo, autor o categoria. ");
+        System.out.println("Pulsa 2 para mostrar todos los libros disponibles. ");
+        System.out.println("Pulsa 3 para coger pestado libro. ");
+        System.out.println("Pulsa 4 para devolver un libro. ");
+        System.out.println("Pulsa 5 para salir de la aplicación. ");
+        boolean seguir = true;
+        while (seguir) {
+            switch (Integer.parseInt(sc.nextLine())) {
+                case 1 -> buscarLibro();
+                case 2 -> mostrarLibros();
+                case 3 -> prestarLibro();
+                case 4 -> devolverLibro();
+                case 5 -> salir();
+                default -> seguir = false;
+            }
+        }
+        sc.close();
+    }
+
+    public static void agregarLibro() {
+
+        System.out.println("Perfecto. Has elegido agregar libro. ");
+        System.out.println("Dame un ISBN: ");
+        int ISBN = Integer.parseInt(sc.nextLine());
+        System.out.println("Dame un título: ");
+        String titulo = sc.nextLine();
+        System.out.println("Dame una categoria: ");
+        String categoria = sc.nextLine();
+        System.out.println("Dame su autor: ");
+        String autor = sc.nextLine();
+        libreria.añadirLibro(new Libro(ISBN, titulo, categoria, autor, false));
+        System.out.println("Listo. Libro añadido.");
+    }
+
+    public static void eliminarLibro() {
+
+        System.out.println("Perfecto. Has elegido eliminar libro. Elige el titulo del libro que deseas eliminar: ");
+        String tituloLibro = sc.nextLine();
+        libreria.eliminarLibro(tituloLibro);
+        System.out.println("Listo. Libro eliminado");
+
+    }
+
+    public static void buscarLibro() {
+        System.out.println("Has elegido buscar libro; de qué manera quieres buscar el libro: ");
+        System.out.println("Si pulsas 1 lo quieres buscar por titulo: ");
+        System.out.println("Si pulsas 2 lo quieres buscar por autor: ");
+        System.out.println("Si pulsas 3 lo quieres buscar por categoria: ");
+        System.out.println("Si pulsas 4, vuelves al menú: ");
+        boolean seguir = true;
+        while (seguir) {
+            switch (Integer.parseInt(sc.nextLine())) {
+                case 1 -> buscarTitulo();
+                case 2 -> buscarAutor();
+                case 3 -> buscarCategoria();
+                case 4 -> menuAdmin();
+                default -> seguir = false;
+            }
+        }
+        sc.close();
+    }
+
+    public static void buscarTitulo() {
+
+        System.out.println("Dime el titulo del libro que deseas buscar ");
+        String tituloLibro = sc.nextLine();
+        libreria.buscarLibroTitulo(tituloLibro);
+        System.out.println(tituloLibro);
+    }
+
+    public static void buscarAutor() {
+
+        System.out.println("Dame el autor del libro que deseas buscar ");
+        String autorLibro = sc.nextLine();
+        libreria.buscarLibroTitulo(autorLibro);
+        System.out.println(autorLibro);
+    }
+
+    public static void buscarCategoria() {
+
+        System.out.println("Dame la categoria del libro que deseas buscar ");
+        String categoriaLibro = sc.nextLine();
+        libreria.buscarLibroTitulo(categoriaLibro);
+        System.out.println(categoriaLibro);
+    }
+
+    public static void mostrarLibros() {
+
+        System.out.println("Has elegido mostrar todos los libros registrados. ");
+        libreria.mostrarLibros();
+    }
+
+    public static void mostrarUsuarios() {
+
+        System.out.println("Has elegido mostrar todos los usuarios registrados. ");
+        gestorUsuarios.mostrarUsuarios();
+    }
+
+    public static void registrarUsuario() {
+        System.out.println("Has elegido registrar usuario. Dame el ID del usuario ");
+        int idUsuario = Integer.parseInt(sc.nextLine());
+        System.out.println("Ahora dame el nombre del usuario");
+        String nombreUsuario = sc.nextLine();
+        System.out.println("¿Quieres que sea administrador? (true/false)");
+        boolean esAdmin = sc.nextBoolean();
+        gestorUsuarios.añadirUsuario(new Usuarios(idUsuario, nombreUsuario, esAdmin));
+        System.out.println("Correcto, usuario guardado.");
+
+    }
+
+    public static void verUsuarios() {
+        System.out.println("Has elegido ver a los usuarios.");
+        System.out.println("Si pulsas 1 si quieres ver un usuario. ");
+        System.out.println("Si pulsas 2 si quieres ver todos los usuarios registrados. ");
+        boolean seguir = true;
+        while (seguir) {
+            switch (Integer.parseInt(sc.nextLine())) {
+                case 1 -> verUsuario();
+                case 2 -> verTodosLosUsuarios();
+                case 3 -> eliminarUsuario();
+                default -> seguir = false;
+            }
+        }
+        sc.close();
+    }
+
+    public static void verUsuario() {
+
+        System.out.println("Dame el ID del usuario que quieras ver: ");
+        int idUsuario = Integer.parseInt(sc.nextLine());
+        Usuarios usuarioEncontrado = gestorUsuarios.buscarUsuarioPorId(idUsuario);
+        System.out.println(usuarioEncontrado.getNombre());
+    }
+
+    public static void verTodosLosUsuarios() {
+
+        System.out.println("Te muestro todos los usuarios registrados en la aplicacion: ");
+        String todosUsuarios = gestorUsuarios.toString();
+        System.err.println(todosUsuarios);
+    }
+
+    public static void eliminarUsuario() {
+
+        System.out.println("Dame el usuario que quieras borrar: ");
+        System.out.println("Por ejemplo, si quieres borrar el usuario con el ID1, pulsa 1 ");
+        int idUsuario = Integer.parseInt(sc.nextLine());
+        boolean eliminado = gestorUsuarios.eliminarUsuario(idUsuario);
+        if (eliminado) {
+            System.err.println("Correcto, usuario eliminado");
+        } else {
+            System.out.println("Incorrecto, usuario no eliminado.");
         }
     }
 
-    // Submenú para Gestión de Usuarios
-    private static void menuUsuarios(Scanner sc) {
-        System.out.println("\n--- Gestión de Usuarios ---");
-        System.out.println("1. Registrar nuevo usuario (admin)");
-        System.out.println("2. Consultar usuarios registrados (admin)");
-        System.out.print("Seleccione una opción: ");
-        int opcion = sc.nextInt();
-        sc.nextLine(); // Limpiar el buffer
+    public static void prestarLibro() {
 
-        switch (opcion) {
-            case 1:
-                System.out.println("Función para registrar usuario.");
-                break;
-            case 2:
-                System.out.println("Función para consultar usuarios.");
-
-                break;
-            default:
-                System.out.println("Opción inválida.");
+        System.out
+                .println("Has elegido coger prestado el libro. Dime el titulo del libro que quieras coger prestado: ");
+        String tituloLibro = sc.nextLine();
+        Libro libroPrestado = libreria.buscarLibroTitulo(tituloLibro);
+        if (libroPrestado != null) {
+            System.out.println("A que usuario le vamos a prestar el libro: ");
+            int idUsuario = Integer.parseInt(sc.nextLine());
+            Usuarios usuarioEncontrado = gestorUsuarios.buscarUsuarioPorId(idUsuario);
+            if (usuarioEncontrado != null) {
+                usuarioEncontrado.setCantidadLibrosPrestados(usuarioEncontrado.getCantidadLibrosPrestados() + 1);
+                libroPrestado.prestar();
+            } else {
+                System.out.println("El usuario no existe. ");
+            }
+        } else {
+            System.out.println("Libro no encontrado. ");
         }
     }
 
-    // Submenú para Gestión de Préstamos
-    private static void menuPrestamos(Scanner sc) {
-        System.out.println("\n--- Gestión de Préstamos ---");
-        System.out.println("1. Realizar préstamo");
-        System.out.println("2. Devolver libro");
-        System.out.println("3. Mostrar libros prestados (admin)");
-        System.out.print("Seleccione una opción: ");
-        int opcion = sc.nextInt();
-        sc.nextLine(); // Limpiar el buffer
-
-        switch (opcion) {
-            case 1:
-                System.out.println("Función para realizar préstamo.");
-                break;
-            case 2:
-                System.out.println("Función para devolver libro.");
-                break;
-            case 3:
-                System.out.println("Función para mostrar libros prestados.");
-                break;
-            default:
-                System.out.println("Opción inválida.");
+    public static void devolverLibro() {
+        System.out.println("Has elegido devolver el libro. Dime el titulo del libro que quieras devolver ");
+        String tituloLibro = sc.nextLine();
+        Libro libroDevuelto = libreria.buscarLibroTitulo(tituloLibro);
+        if (libroDevuelto != null) {
+            System.out.println("A que usuario le vamos a prestar el libro: ");
+            int idUsuario = Integer.parseInt(sc.nextLine());
+            Usuarios usuarioEncontrado = gestorUsuarios.buscarUsuarioPorId(idUsuario);
+            if (usuarioEncontrado != null) {
+                if(usuarioEncontrado.getCantidadLibrosPrestados() > 0){
+                    usuarioEncontrado.setCantidadLibrosPrestados(usuarioEncontrado.getCantidadLibrosPrestados() - 1);
+                    libroDevuelto.devolver();
+                } else {
+                    System.out.println("Este usuario todavia no ha cogido prestado un libro. ");
+                }
+            } else {
+                System.out.println("El usuario no existe. ");
+            }
+        } else {
+            System.out.println("Libro no encontrado. ");
         }
     }
 
-    // Submenú para Estadísticas y Reportes
-    private static void menuEstadisticas(Scanner sc) {
-        System.out.println("\n--- Estadísticas y Reportes ---");
-        System.out.println("1. Número de préstamos totales y activos");
-        System.out.println("2. Libros más prestados");
-        System.out.println("3. Usuario con más préstamos activos");
-        System.out.print("Seleccione una opción: ");
-        int opcion = sc.nextInt();
-        sc.nextLine(); // Limpiar el buffer
-
-        switch (opcion) {
-            case 1:
-                System.out.println("Función para mostrar número de préstamos.");
-                break;
-            case 2:
-                System.out.println("Función para listar libros más prestados.");
-                break;
-            case 3:
-                System.out.println("Función para mostrar usuario con más préstamos activos.");
-                break;
-            default:
-                System.out.println("Opción inválida.");
-        }
+    public static void mostrarLibrosPrestados() {
+        System.out.println("Estos son los libros prestados actualmente: ");
+        libreria.mostrarLibrosPrestados();
+        System.out.println("Estos dos son los libros más prestados: ");
+        libreria.mostrarLibrosmasPrestados();
     }
+
+    public static void mostrarUsuarioConMasPrestamosActivos() {
+        gestorUsuarios.mostrarUsuarioMasPrestamos();
+    }
+
+    public static void salir() {
+        System.out.println("Has salido del programa. Esperamos verle pronto. ");
+    }
+
 }

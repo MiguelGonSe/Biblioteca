@@ -1,38 +1,58 @@
 public class Libreria{
 
     private Libro[] libros;
-    private int capacidad;
-    private static final int tamaño = 50;
+    private int cantidadLibros = 50;
 
     public Libreria() {
 
-        libros = new Libro[tamaño];
-        capacidad = 0;
+        libros = new Libro[] {
+            new Libro(1, "El senior de los anillos", "Aventuras", "Tolkien", false),
+            new Libro(2, "1984", "Historia", "George Orwell", false),
+            new Libro(3, "Cien anios de soledad", "Drama", "Gabriel García Márquez", false),
+            new Libro(4, "Don Quijote de la Mancha", "Historia", "Miguel de Cervantes", false),
+            new Libro(5, "Harry Potter y la piedra filosofal", "Fantasía", "J.K. Rowling", false),
+            new Libro(6, "El principito", "Fantasía", "Antoine de Saint-Exupéry", false),
+            new Libro(7, "Cronica de una muerte anunciada", "Misterio", "Gabriel García Márquez", false),
+            new Libro(8, "Orgullo y prejuicio", "Romance", "Jane Austen", false),
+            new Libro(9, "Fahrenheit 451", "Ciencia ficción", "Ray Bradbury", false),
+            new Libro(10, "Los juegos del hambre", "Aventuras", "Suzanne Collins", false),
+            new Libro(11, "Matar a un ruisenior", "Drama", "Harper Lee", false),
+            new Libro(12, "La sombra del viento", "Misterio", "Carlos Ruiz Zafón", false),
+            new Libro(13, "El hobbit", "Aventuras", "Tolkien", false),
+            new Libro(14, "Dracula", "Terror", "Bram Stoker", false),
+            new Libro(15, "La divina comedia", "Historia", "Dante Alighieri", false)
+        };
     }
 
-    public void añadirLibro(Libro a) {
-
-        if (capacidad < tamaño){
-            libros[capacidad] = a;
-            capacidad++;
+    public void añadirLibro(Libro nuevoLibro){
+        if(cantidadLibros == libros.length){
+            Libro[] nuevoArray = new Libro[libros.length + 1];
+            for(int i = 0; i < libros.length; i++){
+                nuevoArray[i] = libros[i];
+            }
+            libros = nuevoArray;
         }
+        libros[cantidadLibros] = nuevoLibro;
+        cantidadLibros++;
     }
 
-    private int buscarLibroTitulo(String titulo) {
-        int busqueda = -1; //Se inicializa con -1, que indica que el libro no se ha encontrado. 
 
-        for (int i = 0; i < capacidad && busqueda == -1; i++) { //Buscar -1 para parar cuando encuentre la cancion deseada y sales del for.
+
+    public Libro buscarLibroTitulo(String titulo) {
+        Libro busqueda = null; //Se inicializa con -1, que indica que el libro no se ha encontrado. 
+
+        for (int i = 0; i < libros.length && busqueda == null; i++) { //Buscar -1 para parar cuando encuentre la cancion deseada y sales del for.
             if (libros[i].getTitulo().equals(titulo)) {
-                busqueda = i;
+                busqueda = libros[i];
             }
         }
         return busqueda; // Si es -1 no has encontrado.
     }
 
-    private int buscarLibroAutor(String autor) {
+    public int buscarLibroAutor(String autor) {
         int busqueda = -1;  
 
-        for (int i = 0; i < capacidad && busqueda == -1; i++) { 
+        for (int i = 0; i < libros.length && busqueda == -1; i++) { 
             if (libros[i].getAutor().equals(autor)) {
                 busqueda = i;
             }
@@ -40,10 +60,10 @@ public class Libreria{
         return busqueda;
     }
 
-    private int buscarLibroCategoria(String categoria) {
+    public int buscarLibroCategoria(String categoria) {
         int busqueda = -1; 
 
-        for (int i = 0; i < capacidad && busqueda == -1; i++) { 
+        for (int i = 0; i < libros.length && busqueda == -1; i++) { 
             if (libros[i].getCategoria().equals(categoria)) {
                 busqueda = i;
             }
@@ -51,23 +71,63 @@ public class Libreria{
         return busqueda;
     }
 
+    public void mostrarLibros() {
+        for (int i = 0; i < libros.length; i++) { 
+            System.out.println(libros[i]);
+        } 
+    }
+
     public boolean eliminarLibro(String titulo) {
-        int indice = buscarLibroTitulo(titulo);
-        if (indice != -1) { //Si el índice es diferente de -1, significa que el libro fue encontrado en el arreglo (Como anterior)
-            for (int i = indice; i < capacidad - 1; i++) {
-                libros[i] = libros[i + 1]; //El propósito de este bucle es sobrescribir el libro que se desea eliminar
+        for(int i = 0; i < libros.length; i++){
+            if(libros[i].getTitulo().equals(titulo)){
+                for(int j = 0; j < libros.length -1; j++){
+                    libros[j] = libros [j + 1];
+                }
+                libros[cantidadLibros - 1] = null;
+                cantidadLibros--;
+                return true;
             }
-            libros[ --capacidad ] = null;     //La última posición válida del arreglo se marca como Null. Se decrementa la capacidad
-            return true; 
-        } else {
-            return false;
         }
+        return false;
+    }
+       
+
+    public void mostrarLibrosPrestados(){
+
+        for(int i = 0; i < libros.length; i++){
+            if(libros[i].isPrestado()){
+                System.out.println("Este libro está prestado " + libros[i].getTitulo());
+            }
+        }
+    }
+
+    public void mostrarLibrosmasPrestados(){
+        int maximoUno = 0;
+        int maximoDos = 0;
+        Libro libroMaximo = null;
+        Libro libroMinimo = null;
+
+        for(int i = 0; i < libros.length; i++){
+            Libro libroencontrado = libros[i];
+            if(libros[i].getPrestamosTotales() > maximoUno){
+                maximoUno = libroencontrado.getPrestamosTotales();
+                libroMaximo = libroencontrado;
+                maximoDos = maximoUno;
+                libroMinimo = libroMaximo;
+
+            } else if(libros[i].getPrestamosTotales() < maximoUno && libros[i].getPrestamosTotales() > maximoDos){
+                maximoDos = libroencontrado.getPrestamosTotales();
+                libroMinimo = libroencontrado;
+            }
+        }
+        System.out.println(libroMaximo);
+        System.out.println(libroMinimo);
     }
 
     @Override
     public String toString() {
         String stringLibro = ""; //Creamos el String libro por defecto.
-        for (int i = 0; i < capacidad; i++) {
+        for (int i = 0; i < libros.length; i++) {
             stringLibro += libros[i].toString() + "\n"; //Vamos añadiendo libros+toString
         }
         return stringLibro;
