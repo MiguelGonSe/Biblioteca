@@ -1,3 +1,10 @@
+/**
+ * Almendralejo Libreria Online.
+ * 
+ * @author Miguel González y Juan Francisco Hurtado
+ * @version 3.0
+ */
+
 import java.util.Scanner;
 
 public class App {
@@ -126,7 +133,7 @@ public class App {
         System.out.println("Dame su autor: ");
         String autor = sc.nextLine();
         libreria.añadirLibro(new Libro(ISBN, titulo, categoria, autor, false));
-        System.out.println("Listo. Libro añadido.");
+        System.out.println("Correcto. Libro añadido.");
     }
 
     public static void eliminarLibro() {
@@ -134,7 +141,7 @@ public class App {
         System.out.println("Perfecto. Has elegido eliminar libro. Elige el titulo del libro que deseas eliminar: ");
         String tituloLibro = sc.nextLine();
         libreria.eliminarLibro(tituloLibro);
-        System.out.println("Listo. Libro eliminado");
+        System.out.println("Correcto. Libro eliminado");
 
     }
 
